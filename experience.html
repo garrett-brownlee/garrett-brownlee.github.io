@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Portfolio - Experience</title>
+    <style>
+        :root {
+            --canvas-primary: #154734;
+            --canvas-sidebar-bg: #1e1e1e;
+            --canvas-nav-text: #ffffff;
+            --canvas-active-tab: #ffb81c;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --bg-light: #f5f5f5;
+        }
+        body {
+            margin: 0;
+            font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .canvas-global-nav {
+            background-color: var(--canvas-sidebar-bg);
+            width: 84px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            flex-shrink: 0;
+        }
+        .global-logo {
+            width: 45px; height: 45px;
+            background-color: #ffb81c;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex; align-items: center; justify-content: center;
+            color: #154734; font-weight: bold; font-size: 1.2rem;
+        }
+        .global-nav-item {
+            width: 100%; text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.7rem; padding: 12px 0;
+            text-decoration: none;
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+        }
+        .global-nav-item:hover, .global-nav-item.active {
+            color: var(--canvas-nav-text);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .global-nav-icon { font-size: 1.4rem; }
+        .course-nav {
+            width: 160px;
+            border-right: 1px solid var(--border-color);
+            padding: 24px 12px;
+            flex-shrink: 0;
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .course-title-header {
+            font-size: 0.85rem; font-weight: bold; color: #555;
+            margin-bottom: 15px; padding-left: 8px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .course-nav-link {
+            display: block; padding: 8px 12px;
+            color: #0077cc; text-decoration: none; font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            border-radius: 0 4px 4px 0;
+        }
+        .course-nav-link:hover {
+            background-color: var(--bg-light);
+            text-decoration: underline;
+        }
+        .course-nav-link.active {
+            color: #222222; font-weight: bold;
+            border-left-color: var(--canvas-primary);
+            background-color: transparent;
+            text-decoration: none;
+        }
+        .main-workspace {
+            flex-grow: 1;
+            display: flex; flex-direction: column;
+            overflow-y: auto;
+            background-color: #ffffff;
+        }
+        .canvas-header-bar {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.1rem;
+        }
+        .breadcrumb-course { color: var(--canvas-primary); font-weight: bold; text-decoration: none; }
+        .breadcrumb-course:hover { text-decoration: underline; }
+        .breadcrumb-separator { color: #777; }
+        .breadcrumb-current { color: #333; }
+        .content-cols { display: flex; padding: 30px; gap: 40px; flex-grow: 1; }
+        .primary-content { flex-grow: 1; max-width: 850px; }
+        .right-sidebar { width: 240px; flex-shrink: 0; display: flex; flex-direction: column; gap: 24px; }
+        h1 {
+            font-size: 1.8rem; font-weight: 300;
+            margin-top: 0; margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .sidebar-section-title {
+            font-size: 0.9rem; font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px; margin-bottom: 12px;
+        }
+        .sidebar-btn {
+            display: block;
+            background-color: var(--bg-light);
+            border: 1px solid #ccc; color: #333;
+            text-align: center; padding: 8px 12px;
+            border-radius: 4px; text-decoration: none;
+            font-size: 0.85rem; margin-bottom: 8px;
+        }
+        .sidebar-btn:hover { background-color: #eaeaea; }
+
+        /* NEW: "Grade breakdown" style skill cards for this page */
+        .skill-block {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 16px;
+            padding: 16px;
+        }
+        .skill-block-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            color: var(--canvas-primary);
+        }
+        .skill-tag {
+            display: inline-block;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3px 10px;
+            font-size: 0.78rem;
+            margin: 2px 4px 2px 0;
+            color: #444;
+        }
+        .skill-block-desc {
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #444;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="canvas-global-nav">
+        <div class="global-logo">BU</div>
+        <a href="#" class="global-nav-item">
+            <span class="global-nav-icon">👤</span><span>Account</span>
+        </a>
+        <a href="#" class="global-nav-item">
+            <span class="global-nav-icon">📊</span><span>Dashboard</span>
+        </a>
+        <a href="#" class="global-nav-item active">
+            <span class="global-nav-icon">📖</span><span>Courses</span>
+        </a>
+        <a href="#" class="global-nav-item">
+            <span class="global-nav-icon">📅</span><span>Calendar</span>
+        </a>
+        <a href="#" class="global-nav-item">
+            <span class="global-nav-icon">🕒</span><span>History</span>
+        </a>
+    </nav>
+
+    <div class="course-nav">
+        <div class="course-title-header">Neuroscience BS</div>
+        <a href="index.html" class="course-nav-link">Home / Modules</a>
+        <a href="syllabus.html" class="course-nav-link">Syllabus</a>
+        <a href="experience.html" class="course-nav-link active">Experience</a>
+        <a href="#" class="course-nav-link">Projects</a>
+        <a href="#" class="course-nav-link">Education</a>
+    </div>
+
+    <div class="main-workspace">
+        <div class="canvas-header-bar">
+            <a href="index.html" class="breadcrumb-course">NEUR_PORTFOLIO</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span class="breadcrumb-current">Experience</span>
+        </div>
+
+        <div class="content-cols">
+            <main class="primary-content">
+                <h1>Research Experience</h1>
+
+                <div class="skill-block">
+                    <div class="skill-block-title">Undergraduate Research Assistant — Neurobiology Lab</div>
+                    <div>
+                        <span class="skill-tag">1 Year</span>
+                        <span class="skill-tag">Wet Lab</span>
+                        <span class="skill-tag">Data Collection</span>
+                    </div>
+                    <div class="skill-block-desc">
+                        Assisted with ongoing neurobiology research, contributing to experimental setup, data collection, and lab maintenance. Trained in standard operating procedures and safety protocols for handling biological samples.
+                    </div>
+                </div>
+
+                <div class="skill-block">
+                    <div class="skill-block-title">Bench & Technical Skills</div>
+                    <div>
+                        <span class="skill-tag">Pipetting</span>
+                        <span class="skill-tag">Cell Culture</span>
+                        <span class="skill-tag">Western Blot</span>
+                        <span class="skill-tag">Microscopy</span>
+                    </div>
+                    <div class="skill-block-desc">
+                        Replace this list and description with the specific techniques you actually performed — the more specific ("performed 40+ Western blots") the stronger this reads to a PI.
+                    </div>
+                </div>
+
+                <div class="skill-block">
+                    <div class="skill-block-title">Software & Data Analysis</div>
+                    <div>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">GraphPad Prism</span>
+                        <span class="skill-tag">R / Python</span>
+                    </div>
+                    <div class="skill-block-desc">
+                        List whichever of these you've actually used, even briefly for a class project — PIs weigh software fluency heavily since it shortens onboarding time.
+                    </div>
+                </div>
+            </main>
+
+            <aside class="right-sidebar">
+                <div>
+                    <div class="sidebar-section-title">Quick Links</div>
+                    <a href="index.html" class="sidebar-btn">↩ Back to Modules</a>
+                    <a href="#" class="sidebar-btn">📎 Download CV</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+</body>
+</html>
