@@ -1,0 +1,454 @@
+Project #3 (PSY 4400)
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Part #1:
+> setwd("~/Brownlee")
+> proj3A <- read.csv("Couples.csv")
+> install.packages('psych')
+> library(psych)
+> listWW <- c('pass_161.W','pass_164.W','pass_166.W','pass_172.W','pass_173.W','pass_176.W','pass_182.W')
+> listHW <- c('pass_161.H','pass_164.H','pass_166.H','pass_172.H','pass_173.H','pass_176.H','pass_182.H')
+> proj3A$W_withdrawal_GB <- rowSums(proj3A[,listWW])
+> proj3A$H_withdrawal_GB <- rowSums(proj3A[,listHW])
+> proj3A$D_withdrawal_GB <- proj3A$W_withdrawal_GB - proj3A$H_withdrawal_GB
+> model3 <- lm(data=proj3A, proj3A$D_withdrawal_GB ~ 1)
+> summary(model3)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Valid part #1:
+> setwd("~/Brownlee")
+> proj3A <- read.csv("Couples.csv")
+> install.packages('psych')
+Installing package into ‘C:/Users/garre/AppData/Local/R/win-library/4.5’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.5/psych_2.5.6.zip'
+Content type 'application/zip' length 3595974 bytes (3.4 MB)
+downloaded 3.4 MB
+
+package ‘psych’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\garre\AppData\Local\Temp\RtmpsDwQ1j\downloaded_packages
+> library(psych)
+> listWA <- c('att_131.W','att_134.W','att_136.W','att_137.W','att_143.W','att_145.W','att_147.W')
+> listHA <- c('att_131.H','att_134.H','att_136.H','att_137.H','att_143.H','att_145.H','att_147.H')
+> proj3A$W_NegAtt_GB <- rowSums(proj3A[,listWA])
+> proj3A$H_NegAtt_GB <- rowSums(proj3A[,listHA])
+> proj3A$D_NegAtt_GB <- proj3A$W_NegAtt_GB - proj3A$H_NegAtt_GB
+> model3 <- lm(data=proj3A, proj3A$D_NegAtt_GB ~ 1)
+> summary(model3)
+
+Call:
+lm(formula = proj3A$D_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-23.8405  -4.8405  -0.8405   5.1595  22.1595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    2.841      0.487   5.832 1.64e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.808 on 256 degrees of freedom
+
+> model4 <- lm(data=proj3A, proj3A$W_NegAtt_GB ~ 1)
+> summary(model4)
+
+Call:
+lm(formula = proj3A$W_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.3852  -4.3852  -0.3852   3.6148  15.6148 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  12.3852     0.4049   30.59   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 6.492 on 256 degrees of freedom
+
+> model5 <- lm(data=proj3A, proj3A$H_NegAtt_GB ~ 1)
+> summary(model5)
+
+Call:
+lm(formula = proj3A$H_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.5447 -4.5447 -0.5447  3.4553 18.4553 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   9.5447     0.3587   26.61   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.751 on 256 degrees of freedom
+
+----------------------------------overall code after project completion----------------------------------------------------
+R version 4.5.1 (2025-06-13 ucrt) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> setwd("~/Brownlee")
+> proj3A <- read.csv("Couples.csv")
+> install.packages('psych')
+Installing package into ‘C:/Users/garre/AppData/Local/R/win-library/4.5’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.5/psych_2.5.6.zip'
+Content type 'application/zip' length 3595974 bytes (3.4 MB)
+downloaded 3.4 MB
+
+package ‘psych’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\garre\AppData\Local\Temp\RtmpsDwQ1j\downloaded_packages
+> library(psych)
+> listWA <- c('att_131.W','att_134.W','att_136.W','att_137.W','att_143.W','att_145.W','att_147.W')
+> listHA <- c('att_131.H','att_134.H','att_136.H','att_137.H','att_143.H','att_145.H','att_147.H')
+> proj3A$W_NegAtt_GB <- rowSums(proj3A[,listWA])
+> proj3A$H_NegAtt_GB <- rowSums(proj3A[,listHA])
+> proj3A$D_NegAtt_GB <- proj3A$W_NegAtt_GB - proj3A$H_NegAtt_GB
+> model3 <- lm(data=proj3A, proj3A$D_NegAtt_GB ~ 1)
+> summary(model3)
+
+Call:
+lm(formula = proj3A$D_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-23.8405  -4.8405  -0.8405   5.1595  22.1595 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    2.841      0.487   5.832 1.64e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.808 on 256 degrees of freedom
+
+> model4 <- lm(data=proj3A, proj3A$W_NegAtt_GB ~ 1)
+> summary(model4)
+
+Call:
+lm(formula = proj3A$W_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.3852  -4.3852  -0.3852   3.6148  15.6148 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  12.3852     0.4049   30.59   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 6.492 on 256 degrees of freedom
+
+> model5 <- lm(data=proj3A, proj3A$H_NegAtt_GB ~ 1)
+> summary(model5)
+
+Call:
+lm(formula = proj3A$H_NegAtt_GB ~ 1, data = proj3A)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.5447 -4.5447 -0.5447  3.4553 18.4553 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   9.5447     0.3587   26.61   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.751 on 256 degrees of freedom
+
+> listWPBEH <- c('pbeh_72.W','pbeh_74.W','pbeh_76.W','pbeh_81.W','pbeh_83.W','pbeh_85.W','pbeh_87.W')
+> listHPBEH <- c('pbeh_72.H','pbeh_74.H','pbeh_76.H','pbeh_81.H','pbeh_83.H','pbeh_85.H','pbeh_87.H')
+> proj3A$W_CollabCommPrtnr_GB <- rowSums(proj3A[,listWPBEH])
+> proj3A$H_CollabCommPrtnr_GB <- rowSums(proj3A[,listHPBEH])
+> proj3A$D_CollabCommPrtnr_GB <- proj3A$W_CollabCommPrtnr_GB - proj3A$H_CollabCommPrtnr_GB
+> model6 <- lm(data=proj3A, proj3A$D_CollabCommPrtnr_GB ~ 1)
+> summary(model6)
+
+Call:
+lm(formula = proj3A$D_CollabCommPrtnr_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-27.3502  -3.3502  -0.3502   3.6498  18.6498 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  -0.6498     0.3940  -1.649      0.1
+
+Residual standard error: 6.317 on 256 degrees of freedom
+
+> listWOSE <- c("emo_52.W", "emo_55.W", "emo_62.W", "emo_65.W")
+> listHOSE <- c("emo_52.H", "emo_55.H", "emo_62.H", "emo_65.H")
+> proj3A$W_OwnSoftEmo_GB <- rowSums(proj3A[,listWOSE])
+> proj3A$H_OwnSoftEmo_GB <- rowSums(proj3A[,listHOSE])
+> proj3A$D_OwnSoftEmo_GB <- proj3A$W_OwnSoftEmo_GB - proj3A$H_OwnSoftEmo_GB
+> model7 <- lm(data=proj3A, proj3A$D_OwnSoftEmo_GB ~ 1)
+> summary(model7)
+
+Call:
+lm(formula = proj3A$D_OwnSoftEmo_GB ~ 1, data = proj3A)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.0311  -3.0311  -0.0311   2.9689  10.9689 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   2.0311     0.2581   7.869 1.01e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.138 on 256 degrees of freedom
+
+> model8 <- lm(data=proj3A, proj3A$W_OwnSoftEmo_GB ~ 1)
+> summary(model8)
+
+Call:
+lm(formula = proj3A$W_OwnSoftEmo_GB ~ 1, data = proj3A)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.7782 -2.7782  0.2218  3.2218  6.2218 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   9.7782     0.2432    40.2   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.899 on 256 degrees of freedom
+
+> model9 <- lm(data=proj3A, proj3A$H_OwnSoftEmo_GB ~ 1)
+> summary(model9)
+
+Call:
+lm(formula = proj3A$H_OwnSoftEmo_GB ~ 1, data = proj3A)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.7471 -3.7471  0.2529  3.2529  8.2529 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   7.7471     0.2599   29.81   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.167 on 256 degrees of freedom
+
+> proj3B <- read.csv("Breakups.csv")
+> proj3B$break_GB <- proj3B$breakup
+> View(proj3B)
+> Model10 <- lm(data=proj3B, CSI ~ break_GB)
+> summary(Model10)
+
+Call:
+lm(formula = CSI ~ break_GB, data = proj3B)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.2708 -0.5208  0.2292  0.7292  1.6600 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  5.27083    0.07221  72.993  < 2e-16 ***
+break_GB    -0.93083    0.19430  -4.791 3.47e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9019 on 179 degrees of freedom
+Multiple R-squared:  0.1136,	Adjusted R-squared:  0.1087 
+F-statistic: 22.95 on 1 and 179 DF,  p-value: 3.474e-06
+
+> install.packages('plyr')
+Installing package into ‘C:/Users/garre/AppData/Local/R/win-library/4.5’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.5/plyr_1.8.9.zip'
+Content type 'application/zip' length 1124468 bytes (1.1 MB)
+downloaded 1.1 MB
+
+package ‘plyr’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\garre\AppData\Local\Temp\RtmpsDwQ1j\downloaded_packages
+> model11 <- dlply(proj3B,.(break_GB),function(w){lm(data = w, CSI ~ 1)})
+Error in dlply(proj3B, .(break_GB), function(w) { : 
+  could not find function "dlply"
+
+> model11 <- dlply(proj3B,.(break_GB),
++                 function(g){lm(data = g, CSI ~ 1)})
+Error in dlply(proj3B, .(break_GB), function(g) { : 
+  could not find function "dlply"
+
+> model11 <- dlply(proj3B,.(break_GB),
++                    function(g){lm(data = g, CSI ~ 1)})
+Error in dlply(proj3B, .(break_GB), function(g) { : 
+  could not find function "dlply"
+
+> library(plyr)
+> model11 <- dlply(proj3B,.(break_GB),function(w){lm(data = w, CSI ~ 1)})
+> lapply(model11,summary)
+$`0`
+
+Call:
+lm(formula = CSI ~ 1, data = w)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.2708 -0.5208  0.2292  0.7292  0.9792 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  5.27083    0.06601   79.84   <2e-16 ***
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.8245 on 155 degrees of freedom
+
+
+$`1`
+
+Call:
+lm(formula = CSI ~ 1, data = w)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -2.09  -1.34   0.16   1.16   1.66 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    4.340      0.259   16.76 9.48e-15 ***
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.295 on 24 degrees of freedom
+
+
+> install.packages("effsize")
+Installing package into ‘C:/Users/garre/AppData/Local/R/win-library/4.5’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.5/effsize_0.8.1.zip'
+Content type 'application/zip' length 66525 bytes (64 KB)
+downloaded 64 KB
+
+package ‘effsize’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\garre\AppData\Local\Temp\RtmpsDwQ1j\downloaded_packages
+> library(effsize)
+
+Attaching package: ‘effsize’
+
+The following object is masked from ‘package:psych’:
+
+    cohen.d
+> cohen.d(proj3B$CSI ~ proj3B$break_GB)
+
+Cohen's d
+
+d estimate: 1.032073 (large)
+95 percent confidence interval:
+    lower     upper 
+0.5936943 1.4704526 
+
+Warning message:
+In cohen.d.formula(proj3B$CSI ~ proj3B$break_GB) :
+  Cohercing rhs of formula to factor
+
+> s_w <- 6.492
+> s_h <- 5.751
+> df <- 256
+> SS_w <- s_w^2 * df
+> SS_h <- s_h^2 * df
+> SS_w; SS_h
+[1] 10789.39
+[1] 8466.944
+> Model12 <- lm(data=proj3B, anxious ~ break_GB)
+> summary(Model12)
+
+Call:
+lm(formula = anxious ~ break_GB, data = proj3B)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7116 -0.9544 -0.3244  1.0456  3.0456 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.2044     0.1094  29.303   <2e-16 ***
+break_GB      0.7572     0.2942   2.574   0.0109 *  
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.366 on 179 degrees of freedom
+Multiple R-squared:  0.03568,	Adjusted R-squared:  0.03029 
+F-statistic: 6.623 on 1 and 179 DF,  p-value: 0.01088
+
+> model13 <- dlply(proj3B,.(break_GB),function(w){lm(data = w, anxious ~ 1)})
+> lapply(model13,summary)
+$`0`
+
+Call:
+lm(formula = anxious ~ 1, data = w)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2044 -0.9544 -0.3244  1.0456  3.0456 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.2044     0.1102   29.07   <2e-16 ***
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.377 on 155 degrees of freedom
+
+
+$`1`
+
+Call:
+lm(formula = anxious ~ 1, data = w)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7116 -0.8316  0.0384  0.7884  2.7884 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   3.9616     0.2584   15.33 6.75e-14 ***
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.292 on 24 degrees of freedom

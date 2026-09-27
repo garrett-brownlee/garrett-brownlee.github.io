@@ -1,0 +1,427 @@
+> setwd("~/Brownlee")
+> proj4 <- read.csv('Couples.csv')
+> listWPCC <- c('pbeh_72.W', 'pbeh_74.W', 'pbeh_76.W', 'pbeh_81.W', 'pbeh_83.W', 'pbeh_85.W', 'pbeh_87.W')
+> proj4$W_prtnrcollabcomm_GB <- rowSums(proj4[, listWPCC])
+> listWPE <- c('exp_152.W', 'exp_153.W', 'exp_154.W', 'exp_155.W')
+> proj4$W_posexpectns_GB <- rowSums(proj4[, listWPE])
+> listWOSE <- c('emo_52.W', 'emo_55.W', 'emo_62.W', 'emo_65.W')
+> proj4$W_ownsoftemo_GB <- rowSums(proj4[, listWOSE])
+> library(psych)
+> listHres <- c('db_Resolve.H', 'W_prtnrcollabcomm_GB', 'W_posexpectns_GB', 'W_ownsoftemo_GB')
+> corr.test(proj4[ ,listHres])
+Call:corr.test(x = proj4[, listHres])
+Correlation matrix 
+db_Resolve.H W_prtnrcollabcomm_GB
+db_Resolve.H                 1.00                 0.24
+W_prtnrcollabcomm_GB         0.24                 1.00
+W_posexpectns_GB             0.41                 0.46
+W_ownsoftemo_GB             -0.08                -0.19
+W_posexpectns_GB W_ownsoftemo_GB
+db_Resolve.H                     0.41           -0.08
+W_prtnrcollabcomm_GB             0.46           -0.19
+W_posexpectns_GB                 1.00           -0.19
+W_ownsoftemo_GB                 -0.19            1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+db_Resolve.H W_prtnrcollabcomm_GB
+db_Resolve.H                 0.00                    0
+W_prtnrcollabcomm_GB         0.00                    0
+W_posexpectns_GB             0.00                    0
+W_ownsoftemo_GB              0.22                    0
+W_posexpectns_GB W_ownsoftemo_GB
+db_Resolve.H                        0            0.22
+W_prtnrcollabcomm_GB                0            0.01
+W_posexpectns_GB                    0            0.01
+W_ownsoftemo_GB                     0            0.00
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> model3 <- lm(data = proj4, db_Resolve.H ~ W_prtnrcollabcomm_GB + W_posexpectns_GB + W_ownsoftemo_GB)
+> summary(model3)
+
+Call:
+  lm(formula = db_Resolve.H ~ W_prtnrcollabcomm_GB + W_posexpectns_GB + 
+       W_ownsoftemo_GB, data = proj4)
+
+Residuals:
+  Min      1Q  Median      3Q     Max 
+-3.5090 -1.2440  0.0425  0.9907  5.0677 
+
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)          1.942630   0.392243   4.953 1.34e-06 ***
+  W_prtnrcollabcomm_GB 0.020092   0.017940   1.120    0.264    
+W_posexpectns_GB     0.100353   0.017342   5.787 2.12e-08 ***
+  W_ownsoftemo_GB      0.004344   0.026033   0.167    0.868    
+---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.582 on 253 degrees of freedom
+Multiple R-squared:  0.1702,	Adjusted R-squared:  0.1603 
+F-statistic: 17.29 on 3 and 253 DF,  p-value: 3.024e-10
+
+> scale(db_Resolve.H)
+Error: object 'db_Resolve.H' not found
+
+> model4 <- lm(data = proj4, scale(db_Resolve.H) ~ scale(W_prtnrcollabcomm_GB) + scale(W_posexpectns_GB) + scale(W_ownsoftemo_GB))
+> summary(model4)
+
+Call:
+  lm(formula = scale(db_Resolve.H) ~ scale(W_prtnrcollabcomm_GB) + 
+       scale(W_posexpectns_GB) + scale(W_ownsoftemo_GB), data = proj4)
+
+Residuals:
+  Min       1Q   Median       3Q      Max 
+-2.03227 -0.72049  0.02461  0.57378  2.93507 
+
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)
+(Intercept)                 -1.179e-16  5.716e-02   0.000    1.000
+scale(W_prtnrcollabcomm_GB)  7.278e-02  6.499e-02   1.120    0.264
+scale(W_posexpectns_GB)      3.759e-01  6.496e-02   5.787 2.12e-08
+scale(W_ownsoftemo_GB)       9.811e-03  5.879e-02   0.167    0.868
+
+(Intercept)                    
+scale(W_prtnrcollabcomm_GB)    
+scale(W_posexpectns_GB)     ***
+  scale(W_ownsoftemo_GB)         
+---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9163 on 253 degrees of freedom
+Multiple R-squared:  0.1702,	Adjusted R-squared:  0.1603 
+F-statistic: 17.29 on 3 and 253 DF,  p-value: 3.024e-10
+
+> listHVA <- c('att_132.H', 'att_133.H', 'att_135.H', 'att_141.H', 'att_142.H', 'att_144.H', 'att_146.H')
+> proj4$H_validattrbns_GB <- rowSums(proj4[, listHVA])
+> listHNA <- c('att_131.H', 'att_134.H', 'att_136.H', 'att_137.H', 'att_143.H', 'att_145.H', 'att_147.H')
+> proj4$H_negattrbns_GB <- rowSums(proj4[, listHNA])
+> listHPFE <- c('pem_33.H', 'pem_36.H', 'pem_43.H', 'pem_46.H')
+> proj4$H_prtnrflatemo_GB <- rowSums(proj4[, listHPFE])
+> listWsat <- c('dnr_Satis.W', 'H_validattrbns_GB', 'H_negattrbns_GB', 'H_prtnrflatemo_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W              1.00              0.22
+H_validattrbns_GB        0.22              1.00
+H_negattrbns_GB         -0.29             -0.59
+H_prtnrflatemo_GB       -0.19             -0.25
+H_negattrbns_GB H_prtnrflatemo_GB
+dnr_Satis.W                 -0.29             -0.19
+H_validattrbns_GB           -0.59             -0.25
+H_negattrbns_GB              1.00              0.32
+H_prtnrflatemo_GB            0.32              1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W                 0                 0
+H_validattrbns_GB           0                 0
+H_negattrbns_GB             0                 0
+H_prtnrflatemo_GB           0                 0
+H_negattrbns_GB H_prtnrflatemo_GB
+dnr_Satis.W                     0                 0
+H_validattrbns_GB               0                 0
+H_negattrbns_GB                 0                 0
+H_prtnrflatemo_GB               0                 0
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> listHCC <- c('beh_92.H', 'beh_94.H', 'beh_96.H', 'beh_101.H', 'beh_103.H', 'beh_105.H', 'beh_107.H')
+> proj4$H_owncollabcomm_GB <- rowSums(proj4[, listHCC])
+> listHNA <- c('att_131.H', 'att_134.H', 'att_136.H', 'att_137.H', 'att_143.H', 'att_145.H', 'att_147.H')
+> proj4$H_negattrbns_GB <- rowSums(proj4[, listHNA])
+> listHOHE <- c('emo_51.H', 'emo_54.H', 'emo_61.H', 'emo_64.H')
+> proj4$H_ownhardemo_GB <- rowSums(proj4[, listHOHE])
+> listWsat <- c('dnr_Satis.W', 'H_owncollabcomm_GB', 'H_negattrbns_GB', 'H_ownhardemo_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_owncollabcomm_GB
+dnr_Satis.W               1.00               0.13
+H_owncollabcomm_GB        0.13               1.00
+H_negattrbns_GB          -0.29              -0.31
+H_ownhardemo_GB          -0.14              -0.47
+H_negattrbns_GB H_ownhardemo_GB
+dnr_Satis.W                  -0.29           -0.14
+H_owncollabcomm_GB           -0.31           -0.47
+H_negattrbns_GB               1.00            0.43
+H_ownhardemo_GB               0.43            1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_owncollabcomm_GB
+dnr_Satis.W               0.00               0.06
+H_owncollabcomm_GB        0.04               0.00
+H_negattrbns_GB           0.00               0.00
+H_ownhardemo_GB           0.03               0.00
+H_negattrbns_GB H_ownhardemo_GB
+dnr_Satis.W                      0            0.06
+H_owncollabcomm_GB               0            0.00
+H_negattrbns_GB                  0            0.00
+H_ownhardemo_GB                  0            0.00
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> listHPCC <- c('pbeh_72.H', 'pbeh_74.H', 'pbeh_76.H', 'pbeh_81.H', 'pbeh_83.H', 'pbeh_85.H', 'pbeh_87.H')
+> proj4$H_prtnrcollabcomm_GB <- rowSums(proj4[, listHPCC])
+> listHNA <- c('att_131.H', 'att_134.H', 'att_136.H', 'att_137.H', 'att_143.H', 'att_145.H', 'att_147.H')
+> proj4$H_negattrbns_GB <- rowSums(proj4[, listHNA])
+> listHOFE <- c('emo_53.H', 'emo_56.H', 'emo_63.H', 'emo_66.H')
+> proj4$H_ownflatemo_GB <- rowSums(proj4[, listHOFE])
+> listWsat <- c('dnr_Satis.W', 'H_prtnrcollabcomm_GB', 'H_negattrbns_GB', 'H_ownflatemo_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_prtnrcollabcomm_GB
+dnr_Satis.W                 1.00                 0.24
+H_prtnrcollabcomm_GB        0.24                 1.00
+H_negattrbns_GB            -0.29                -0.38
+H_ownflatemo_GB            -0.14                -0.03
+H_negattrbns_GB H_ownflatemo_GB
+dnr_Satis.W                    -0.29           -0.14
+H_prtnrcollabcomm_GB           -0.38           -0.03
+H_negattrbns_GB                 1.00            0.20
+H_ownflatemo_GB                 0.20            1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_prtnrcollabcomm_GB
+dnr_Satis.W                 0.00                 0.00
+H_prtnrcollabcomm_GB        0.00                 0.00
+H_negattrbns_GB             0.00                 0.00
+H_ownflatemo_GB             0.03                 0.67
+H_negattrbns_GB H_ownflatemo_GB
+dnr_Satis.W                        0            0.06
+H_prtnrcollabcomm_GB               0            0.67
+H_negattrbns_GB                    0            0.00
+H_ownflatemo_GB                    0            0.00
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> listHPE <- c('exp_152.H', 'exp_153.H', 'exp_154.H', 'exp_155.H')
+> proj4$H_posexpect_GB <- rowSums(proj4[, listHPE])
+> 
+  > listHPE <- c('exp_152.H', 'exp_153.H', 'exp_154.H', 'exp_155.H')
+> proj4$H_posexpect_GB <- rowSums(proj4[, listHPE])
+> listHNA <- c('att_131.H', 'att_134.H', 'att_136.H', 'att_137.H', 'att_143.H', 'att_145.H', 'att_147.H')
+> proj4$H_negattrbns_GB <- rowSums(proj4[, listHNA])
+> listHPI <- c('pass_163.H', 'pass_171.H', 'pass_175.H', 'pass_181.H', 'pass_183.H', 'pass_185.H', 'pass_186.H')
+> proj4$H_passimmoblty_GB <- rowSums(proj4[, listHPI])
+> listWsat <- c('dnr_Satis.W', 'H_posexpect_GB', 'H_negattrbns_GB', 'H_passimmoblty_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_posexpect_GB
+dnr_Satis.W              1.00           0.43
+H_posexpect_GB           0.43           1.00
+H_negattrbns_GB         -0.29          -0.32
+H_passimmoblty_GB       -0.25          -0.25
+H_negattrbns_GB H_passimmoblty_GB
+dnr_Satis.W                 -0.29             -0.25
+H_posexpect_GB              -0.32             -0.25
+H_negattrbns_GB              1.00              0.35
+H_passimmoblty_GB            0.35              1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_posexpect_GB
+dnr_Satis.W                 0              0
+H_posexpect_GB              0              0
+H_negattrbns_GB             0              0
+H_passimmoblty_GB           0              0
+H_negattrbns_GB H_passimmoblty_GB
+dnr_Satis.W                     0                 0
+H_posexpect_GB                  0                 0
+H_negattrbns_GB                 0                 0
+H_passimmoblty_GB               0                 0
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> listHVA <- c('att_132.H', 'att_133.H', 'att_135.H', 'att_141.H', 'att_142.H', 'att_144.H', 'att_146.H')
+> proj4$H_validattrbns_GB <- rowSums(proj4[, listHVA])
+> listHPE <- c('exp_152.H', 'exp_153.H', 'exp_154.H', 'exp_155.H')
+> proj4$H_posexpect_GB <- rowSums(proj4[, listHPE])
+> listHPHE <- c('pem_31.H', 'pem_34.H', 'pem_41.H', 'pem_44.H')
+> proj4$H_prtnrhardemo_GB <- rowSums(proj4[, listHPHE])
+> listWsat <- c('dnr_Satis.W', 'H_validattrbns_GB', 'H_posexpect_GB', 'H_prtnrhardemo_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W              1.00              0.22
+H_validattrbns_GB        0.22              1.00
+H_posexpect_GB           0.43              0.43
+H_prtnrhardemo_GB       -0.11             -0.21
+H_posexpect_GB H_prtnrhardemo_GB
+dnr_Satis.W                 0.43             -0.11
+H_validattrbns_GB           0.43             -0.21
+H_posexpect_GB              1.00             -0.26
+H_prtnrhardemo_GB          -0.26              1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W              0.00                 0
+H_validattrbns_GB        0.00                 0
+H_posexpect_GB           0.00                 0
+H_prtnrhardemo_GB        0.08                 0
+H_posexpect_GB H_prtnrhardemo_GB
+dnr_Satis.W                    0              0.08
+H_validattrbns_GB              0              0.00
+H_posexpect_GB                 0              0.00
+H_prtnrhardemo_GB              0              0.00
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> listHVA <- c('att_132.H', 'att_133.H', 'att_135.H', 'att_141.H', 'att_142.H', 'att_144.H', 'att_146.H')
+> proj4$H_validattrbns_GB <- rowSums(proj4[, listHVA])
+> listHPE <- c('exp_152.H', 'exp_153.H', 'exp_154.H', 'exp_155.H')
+> proj4$H_posexpect_GB <- rowSums(proj4[, listHPE])
+> listHPHE <- c('pem_31.H', 'pem_34.H', 'pem_41.H', 'pem_44.H')
+> proj4$H_prtnrhardemo_GB <- rowSums(proj4[, listHPHE])
+> library(psych)
+> listWsat <- c('dnr_Satis.W', 'H_validattrbns_GB', 'H_posexpect_GB', 'H_prtnrhardemo_GB')
+> corr.test(proj4[ ,listWsat])
+Call:corr.test(x = proj4[, listWsat])
+Correlation matrix 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W              1.00              0.22
+H_validattrbns_GB        0.22              1.00
+H_posexpect_GB           0.43              0.43
+H_prtnrhardemo_GB       -0.11             -0.21
+H_posexpect_GB H_prtnrhardemo_GB
+dnr_Satis.W                 0.43             -0.11
+H_validattrbns_GB           0.43             -0.21
+H_posexpect_GB              1.00             -0.26
+H_prtnrhardemo_GB          -0.26              1.00
+Sample Size 
+[1] 257
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+dnr_Satis.W H_validattrbns_GB
+dnr_Satis.W              0.00                 0
+H_validattrbns_GB        0.00                 0
+H_posexpect_GB           0.00                 0
+H_prtnrhardemo_GB        0.08                 0
+H_posexpect_GB H_prtnrhardemo_GB
+dnr_Satis.W                    0              0.08
+H_validattrbns_GB              0              0.00
+H_posexpect_GB                 0              0.00
+H_prtnrhardemo_GB              0              0.00
+
+To see confidence intervals of the correlations, print with the short=FALSE option
+> model3 <- lm(data = proj4, dnr_Satis.W ~ H_validattrbns_GB + H_posexpect_GB + H_prtnrhardemo_GB)
+> 
+  > summary(model3)
+
+Call:
+  lm(formula = dnr_Satis.W ~ H_validattrbns_GB + H_posexpect_GB + 
+       H_prtnrhardemo_GB, data = proj4)
+
+Residuals:
+  Min       1Q   Median       3Q      Max 
+-11.8035  -1.2963   0.8304   2.0828   7.2450 
+
+Coefficients:
+  Estimate Std. Error t value
+(Intercept)       7.400856   0.987615   7.494
+H_validattrbns_GB 0.028440   0.040149   0.708
+H_posexpect_GB    0.248098   0.038130   6.507
+H_prtnrhardemo_GB 0.009045   0.051265   0.176
+Pr(>|t|)    
+(Intercept)       1.12e-12 ***
+  H_validattrbns_GB    0.479    
+H_posexpect_GB    4.09e-10 ***
+  H_prtnrhardemo_GB    0.860    
+---
+  Signif. codes:  
+  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.193 on 253 degrees of freedom
+Multiple R-squared:  0.1893,	Adjusted R-squared:  0.1797 
+F-statistic: 19.69 on 3 and 253 DF,  p-value: 1.667e-11
+
+> model4 <- lm(data = proj4, scale(dnr_Satis.W) ~ scale(H_validattrbns_GB) + scale(H_posexpect_GB) + scale(H_prtnrhardemo_GB))
+> summary(model4)
+
+Call:
+  lm(formula = scale(dnr_Satis.W) ~ scale(H_validattrbns_GB) + 
+       scale(H_posexpect_GB) + scale(H_prtnrhardemo_GB), data = proj4)
+
+Residuals:
+  Min      1Q  Median      3Q     Max 
+-3.3476 -0.3676  0.2355  0.5907  2.0548 
+
+Coefficients:
+  Estimate Std. Error
+(Intercept)              -1.255e-16  5.650e-02
+scale(H_validattrbns_GB)  4.472e-02  6.313e-02
+scale(H_posexpect_GB)     4.166e-01  6.402e-02
+scale(H_prtnrhardemo_GB)  1.041e-02  5.898e-02
+t value Pr(>|t|)    
+(Intercept)                0.000    1.000    
+scale(H_validattrbns_GB)   0.708    0.479    
+scale(H_posexpect_GB)      6.507 4.09e-10 ***
+  scale(H_prtnrhardemo_GB)   0.176    0.860    
+---
+  Signif. codes:  
+  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9057 on 253 degrees of freedom
+Multiple R-squared:  0.1893,	Adjusted R-squared:  0.1797 
+F-statistic: 19.69 on 3 and 253 DF,  p-value: 1.667e-11
+
+> model3 <- lm(data = proj4, dnr_Satis.W ~ H_validattrbns_GB + H_posexpect_GB + H_prtnrhardemo_GB)
+> summary(model43)
+Error: object 'model43' not found
+
+> model5 <- lm(data = proj4, dnr_Satis.W ~ H_validattrbns_GB + H_posexpect_GB + H_prtnrhardemo_GB)
+> summary(model5)
+
+Call:
+  lm(formula = dnr_Satis.W ~ H_validattrbns_GB + H_posexpect_GB + 
+       H_prtnrhardemo_GB, data = proj4)
+
+Residuals:
+  Min       1Q   Median       3Q      Max 
+-11.8035  -1.2963   0.8304   2.0828   7.2450 
+
+Coefficients:
+  Estimate Std. Error t value
+(Intercept)       7.400856   0.987615   7.494
+H_validattrbns_GB 0.028440   0.040149   0.708
+H_posexpect_GB    0.248098   0.038130   6.507
+H_prtnrhardemo_GB 0.009045   0.051265   0.176
+Pr(>|t|)    
+(Intercept)       1.12e-12 ***
+  H_validattrbns_GB    0.479    
+H_posexpect_GB    4.09e-10 ***
+  H_prtnrhardemo_GB    0.860    
+---
+  Signif. codes:  
+  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3.193 on 253 degrees of freedom
+Multiple R-squared:  0.1893,	Adjusted R-squared:  0.1797 
+F-statistic: 19.69 on 3 and 253 DF,  p-value: 1.667e-11
+
+> model6 <- lm(data = proj4, scale(dnr_Satis.W) ~ scale(H_validattrbns_GB) + scale(H_posexpect_GB) + scale(H_prtnrhardemo_GB))
+> model6 <- lm(data = proj4, scale(dnr_Satis.W) ~ scale(H_validattrbns_GB) + scale(H_posexpect_GB) + scale(H_prtnrhardemo_GB))
+> summary(model4)
+
+Call:
+  lm(formula = scale(dnr_Satis.W) ~ scale(H_validattrbns_GB) + 
+       scale(H_posexpect_GB) + scale(H_prtnrhardemo_GB), data = proj4)
+
+Residuals:
+  Min      1Q  Median      3Q     Max 
+-3.3476 -0.3676  0.2355  0.5907  2.0548 
+
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)              -1.255e-16  5.650e-02   0.000    1.000    
+scale(H_validattrbns_GB)  4.472e-02  6.313e-02   0.708    0.479    
+scale(H_posexpect_GB)     4.166e-01  6.402e-02   6.507 4.09e-10 ***
+  scale(H_prtnrhardemo_GB)  1.041e-02  5.898e-02   0.176    0.860    
+---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9057 on 253 degrees of freedom
+Multiple R-squared:  0.1893,	Adjusted R-squared:  0.1797 
+F-statistic: 19.69 on 3 and 253 DF,  p-value: 1.667e-11
