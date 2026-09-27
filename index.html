@@ -1,9 +1,4 @@
-import os
-
-# Create the generated directory if it doesn't exist
-os.makedirs("generated", exist_ok=True)
-
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,10 +6,10 @@ html_content = """<!DOCTYPE html>
     <title>Canvas Portfolio - Home</title>
     <style>
         :root {
-            --canvas-primary: #002244; /* Dark Baylor-style blue/navy */
+            --canvas-primary: #154734; /* Baylor Green */
             --canvas-sidebar-bg: #1e1e1e;
             --canvas-nav-text: #ffffff;
-            --canvas-active-tab: #0077cc;
+            --canvas-active-tab: #ffb81c; /* Baylor Gold */
             --text-color: #333333;
             --border-color: #e0e0e0;
             --bg-light: #f5f5f5;
@@ -29,7 +24,7 @@ html_content = """<!DOCTYPE html>
             overflow: hidden;
         }
 
-        /* 1. Global Canvas Global Navigation (Far Left) */
+        /* 1. Canvas Global Navigation (Far Left) */
         .canvas-global-nav {
             background-color: var(--canvas-sidebar-bg);
             width: 84px;
@@ -43,13 +38,13 @@ html_content = """<!DOCTYPE html>
         .global-logo {
             width: 45px;
             height: 45px;
-            background-color: #d1a153; /* Gold accent */
+            background-color: #ffb81c; /* Gold accent */
             border-radius: 8px;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #154734;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -323,7 +318,6 @@ html_content = """<!DOCTYPE html>
         <a href="#" class="course-nav-link">Syllabus</a>
         <a href="#" class="course-nav-link">Assignments</a>
         <a href="#" class="course-nav-link">Pages</a>
-        <a href="#" class="course-nav-link">Quizzes</a>
     </div>
 
     <!-- 3. Main Action/Workspace View -->
@@ -350,3 +344,8 @@ html_content = """<!DOCTYPE html>
                     <div class="module-item">
                         <div class="item-left">
                             <span>📄</span>
+                            <a href="#" class="item-title-link">Lab Methodology Overview & Standard Protocols</a>
+                        </div>
+                        <span class="item-meta">Page</span>
+                    </div>
+                    <div class="module-item">
