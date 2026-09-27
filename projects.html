@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Portfolio - Experience</title>
+    <title>Canvas Portfolio - Projects</title>
     <style>
         :root {
             --canvas-primary: #154734;
@@ -118,12 +118,10 @@
             font-size: 0.85rem; margin-bottom: 8px;
         }
         .sidebar-btn:hover { background-color: #eaeaea; }
-
-        /* NEW: "Grade breakdown" style skill cards for this page */
         .skill-block {
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             padding: 16px;
         }
         .skill-block-title {
@@ -147,6 +145,22 @@
             line-height: 1.5;
             color: #444;
             margin-top: 8px;
+            margin-bottom: 14px;
+        }
+        /* NEW: responsive video embed wrapper */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 4px;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -175,8 +189,8 @@
         <div class="course-title-header">Neuroscience BS</div>
         <a href="index.html" class="course-nav-link">Home / Modules</a>
         <a href="syllabus.html" class="course-nav-link">Syllabus</a>
-        <a href="experience.html" class="course-nav-link active">Experience</a>
-        <a href="projects.html" class="course-nav-link">Projects</a>
+        <a href="experience.html" class="course-nav-link">Experience</a>
+        <a href="projects.html" class="course-nav-link active">Projects</a>
         <a href="#" class="course-nav-link">Education</a>
     </div>
 
@@ -184,47 +198,40 @@
         <div class="canvas-header-bar">
             <a href="index.html" class="breadcrumb-course">NEUR_PORTFOLIO</a>
             <span class="breadcrumb-separator">&gt;</span>
-            <span class="breadcrumb-current">Experience</span>
+            <span class="breadcrumb-current">Projects</span>
         </div>
 
         <div class="content-cols">
             <main class="primary-content">
-                <h1>Research Experience</h1>
+                <h1>Projects & Science Communication</h1>
 
                 <div class="skill-block">
-                    <div class="skill-block-title">Undergraduate Research Assistant — Neurobiology Lab</div>
+                    <div class="skill-block-title">Informative Speech: Neurodegenerative Disease Prevention</div>
                     <div>
-                        <span class="skill-tag">1 Year</span>
-                        <span class="skill-tag">Wet Lab</span>
-                        <span class="skill-tag">Data Collection</span>
+                        <span class="skill-tag">Science Communication</span>
+                        <span class="skill-tag">Literature Review</span>
+                        <span class="skill-tag">APA Citation</span>
                     </div>
                     <div class="skill-block-desc">
-                        Assisted with ongoing neurobiology research, contributing to experimental setup, data collection, and lab maintenance. Trained in standard operating procedures and safety protocols for handling biological samples.
+                        A researched presentation examining the biological mechanisms behind neurodegenerative disease, the environmental and lifestyle factors accelerating its global prevalence, and evidence-based prevention strategies. Synthesized findings from sources including The Lancet Public Health and Frontiers in Aging Neuroscience into a clear, audience-accessible narrative.
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/VEnuP5itnIo" title="Informative Speech: Neurodegenerative Disease Prevention" allowfullscreen></iframe>
                     </div>
                 </div>
 
                 <div class="skill-block">
-                    <div class="skill-block-title">Bench & Technical Skills</div>
+                    <div class="skill-block-title">Persuasive Speech: Neuro-Ethics of Attention & Technology Design</div>
                     <div>
-                        <span class="skill-tag">Pipetting</span>
-                        <span class="skill-tag">Cell Culture</span>
-                        <span class="skill-tag">Western Blot</span>
-                        <span class="skill-tag">Microscopy</span>
+                        <span class="skill-tag">Mesolimbic Dopamine Pathway</span>
+                        <span class="skill-tag">Policy Advocacy</span>
+                        <span class="skill-tag">Peer-Reviewed Sourcing</span>
                     </div>
                     <div class="skill-block-desc">
-                        Replace this list and description with the specific techniques you actually performed — the more specific ("performed 40+ Western blots") the stronger this reads to a PI.
+                        A policy-focused argument grounded in the neurobiology of the brain's reward system, drawing on coursework in Cognition, Learning & Behavior, Affective Neuroscience, and Advanced Principles. Cites peer-reviewed research (Montag et al., 2019; Lorenz et al., 2015) to argue for neuro-ethical design standards and legislative reform such as the SMART Act.
                     </div>
-                </div>
-
-                <div class="skill-block">
-                    <div class="skill-block-title">Software & Data Analysis</div>
-                    <div>
-                        <span class="skill-tag">Excel</span>
-                        <span class="skill-tag">GraphPad Prism</span>
-                        <span class="skill-tag">R / Python</span>
-                    </div>
-                    <div class="skill-block-desc">
-                        List whichever of these you've actually used, even briefly for a class project — PIs weigh software fluency heavily since it shortens onboarding time.
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/Is83_o0K9VA" title="Persuasive Speech: Neuro-Ethics of Attention & Technology Design" allowfullscreen></iframe>
                     </div>
                 </div>
             </main>
