@@ -324,7 +324,7 @@
     <div class="main-workspace">
         <!-- Canvas Breadcrumbs Bar -->
         <div class="canvas-header-bar">
-            <a href="#" class="breadcrumb-course">NEUR_PORTFOLIO</a>
+            <a href="README.md" class="breadcrumb-course">NEUR_PORTFOLIO</a>
             <span class="breadcrumb-separator">&gt;</span>
             <span class="breadcrumb-current">Modules</span>
         </div>
