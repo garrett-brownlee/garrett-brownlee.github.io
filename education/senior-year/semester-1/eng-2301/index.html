@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Portfolio - Course</title>
+    <link rel="stylesheet" href="/assets/canvas.css">
+</head>
+<body>
+
+    <nav class="canvas-global-nav">
+        <div class="global-logo">BU</div>
+        <a href="#" class="global-nav-item"><span class="global-nav-icon">👤</span><span>Account</span></a>
+        <a href="#" class="global-nav-item"><span class="global-nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="#" class="global-nav-item active"><span class="global-nav-icon">📖</span><span>Courses</span></a>
+        <a href="#" class="global-nav-item"><span class="global-nav-icon">📅</span><span>Calendar</span></a>
+        <a href="#" class="global-nav-item"><span class="global-nav-icon">🕒</span><span>History</span></a>
+    </nav>
+
+    <div class="course-nav">
+        <div class="course-title-header">Neuroscience BS</div>
+        <a href="/index.html" class="course-nav-link">Home / Modules</a>
+        <a href="/syllabus.html" class="course-nav-link">Syllabus</a>
+        <a href="/experience.html" class="course-nav-link">Experience</a>
+        <a href="/projects.html" class="course-nav-link">Projects</a>
+        <a href="/education/index.html" class="course-nav-link active">Education</a>
+    </div>
+
+    <div class="main-workspace">
+        <div class="canvas-header-bar">
+            <a href="/index.html" class="breadcrumb-course">NEUR_PORTFOLIO</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="/education/index.html" class="breadcrumb-course">Education</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="/education/senior-year/index.html" class="breadcrumb-course">Senior Year</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="/education/senior-year/semester-1/index.html" class="breadcrumb-course">Semester 1</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span class="breadcrumb-current">ENG 2301</span>
+        </div>
+
+        <div class="content-cols">
+            <main class="primary-content">
+                <h1 id="course-title"></h1>
+                <div class="course-meta" id="course-meta"></div>
+                <input type="text" id="filter" class="filter-box" placeholder="Search this course's files...">
+                <div id="groups"></div>
+            </main>
+
+            <aside class="right-sidebar">
+                <div>
+                    <div class="sidebar-section-title">Quick Links</div>
+                    <a href="/education/senior-year/semester-1/index.html" class="sidebar-btn">↩ Back to Semester 1</a>
+                    <a href="/index.html" class="sidebar-btn">🏠 Back to Modules</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/assets/course-page.js"></script>
+    <script>
+    // =====================================================
+    //  EDIT THIS SECTION TO ADD / REMOVE FILES
+    //  One line per file:  ["Title shown on page", "filename.pdf"],
+    // =====================================================
+    const COURSE = {
+        code: "ENG 2301",
+        title: "Tree Story Project",
+        term: "Fall 2025 · Baylor University",
+        groups: [
+            {
+                name: "My Work",
+                files: [
+                    ["Final Tree Story", "Final Tree Story (Brownlee, Garrett).pdf"],
+                    ["Three Tree Reflections (Draft)", "Three tree reflections (Tree Story Draft).pdf"],
+                    ["Tree Reflection, Part 3", "Tree Reflection (Part 3) (Brownlee, Garrett).pdf"],
+                    // ["Tree Story Video", "https://youtu.be/PASTE_YOUR_LINK_HERE"],
+                ]
+            },
+            {
+                name: "Assignment Materials",
+                files: [
+                    ["Tree Stories Assignment Overview", "ed-Brit Lit-EHUM-2025-Tree Stories Assignment.Overview.pdf"],
+                    ["Tree Story Assignment Page", "Tree Story Assignment Page.pdf"],
+                    ["Tree Assignment (Part 2)", "Tree Assignment (Part 2).pdf"],
+                ]
+            },
+            {
+                name: "Course Information",
+                files: [
+                    ["Course Schedule", "ENG 2301 14 (Schedule).pdf"],
+                ]
+            },
+            {
+                name: "Images",
+                files: [
+                    ["Photo (IMG 9428)", "thumbnail_IMG_9428.png"],
+                    ["Attachment Thumbnail", "GetAttachmentThumbnail.jpg"],
+                ]
+            }
+        ]
+    };
+    renderCourse(COURSE);
+    </script>
+</body>
+</html>
